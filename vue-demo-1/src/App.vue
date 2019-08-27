@@ -2,6 +2,7 @@
   <div>
     <!-- <div>{{n}}</div> -->
     <div class="row">
+      <!-- App把n和finish传递给Vue -->
       <Cell @click="onClickCell(0,$event)" :n="n" :finish="finish"/>
       <Cell @click="onClickCell(1,$event)" :n="n" :finish="finish"/>
       <Cell @click="onClickCell(2,$event)" :n="n" :finish="finish"/>
@@ -38,6 +39,7 @@ export default {
 
     // text是Cell传递给App的
     onClickCell(i, text) {
+
       // console.log(`第${i}个cell被点击了,内容是${text}`);
       this.map[Math.floor(i / 3)][i % 3] = text;
       this.n++;

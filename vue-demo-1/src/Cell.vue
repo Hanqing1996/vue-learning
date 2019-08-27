@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ["n","finish"], // App传递给Cell
+  props: ["n","finish"], // App把n和finish传递给Cell(会响应App中n和finish的变化)
 
   data() {
     return { a: false };
@@ -23,7 +23,7 @@ export default {
 
           this.a = true;
           this.text = this.n % 2 == 0 ? "x" : "o";
-          this.$emit("click",this.text); // 告诉App.vue，当前cell被点击了,并向App传递text
+          this.$emit("click",this.text); // 告诉App，当前cell被点击了,并向App传递text
       }  
     }
   }

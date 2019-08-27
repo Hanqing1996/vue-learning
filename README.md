@@ -27,3 +27,5 @@ yarn vue
 #### 简写
 * v-on:等价于@
 * v-bind省略
+
+#### [App与Cell的通信]()
