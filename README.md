@@ -13,3 +13,17 @@ vue create .
 ```
 yarn vue
 ```
+#### template
+* template只能包含一个根元素
+```
+<template>
+    <div></div>
+    <div></div>
+</template>
+
+// 报错:Component template should contain exactly one root element
+```
+
+#### 简写
+* v-on:等价于@
+* v-bind省略
