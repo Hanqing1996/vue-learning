@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <div>{{n}}</div> -->
+    <!-- <div>{{n}}</div> --> 
     <div class="row">
       <!-- App把n和finish传递给Vue -->
       <Cell @click="onClickCell(0,$event)" :n="n" :finish="finish"/>

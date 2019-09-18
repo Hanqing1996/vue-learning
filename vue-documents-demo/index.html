@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <div id="app"> -->
+        <!-- 为组件的title属性赋值 -->
+        <button-counter title="this is a titles"></button-counter> 
+    <!-- </div> -->
+</body>
+
+<script>
+
+    Vue.component('button-counter', {
+        props: ['title'],
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button v-on:click="count++">{{title}} you clicked me {{ count }} times</button>'
+    })
+
+    // var vm = new Vue({
+    //     el: "#app",
+    //     data: {}
+    // })
+</script>
+<style>
+</style>
+
+</html>
