@@ -294,7 +294,9 @@ new Vue({
 ```
  var vm = new Vue({
         el: "#app",
-        data: {},
+        data: {
+            // text没有初始化
+        },
     })
 ```
 #### 插槽:往组件里插入内容 
@@ -343,6 +345,17 @@ new Vue({
 * src/components/HellowWorld.vue:单文件组件
 
 #### 组件名规范
-* 字母全小写且必须包含一个连字符,比如button-counter
-* 
+1. 不使用模板字符串
+```
+Vue.component('blog-post', {
+
+  props: ['postTitle'],
+  template: '<h3>{{ postTitle }}</h3>'
+})
+
+<blog-post post-title="hello!"></blog-post>
+```
+
+
+
 

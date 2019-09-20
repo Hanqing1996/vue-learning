@@ -12,14 +12,14 @@
 <body>
     <!-- <div id="app"> -->
         <!-- 为组件的title属性赋值 -->
-        <button-counter title="this is a titles"></button-counter> 
+        <button-counter title-name="this is a titles"></button-counter> 
     <!-- </div> -->
 </body>
 
 <script>
 
-    Vue.component('button-counter', {
-        props: ['title'],
+    Vue.component('button-counter', { 
+        props: ['titleName'],
         data: function () {
             return {
                 count: 0

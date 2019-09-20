@@ -11,20 +11,26 @@
 
 <body>
     <div id="father">
-        <child></child>
+        <blog-post>
+
+
+        </blog-post>
     </div>
 </body>
 
 <script>
 
+    Vue.component('blog-post', {
+        template: `<div><slot><blog-post2 postTitle="haha">{{ postTitle }}</blog-post2></slot><>
+    })
+
+    Vue.component('blog-post2', {
+        props: ['postTitle']
+    })
+
     var vm = new Vue({
         el: "#father",
         data: {},
-        components: {
-            child: {
-                template: '<div>组件child的内容<div>'
-            }
-        }
     })
 </script>
 
