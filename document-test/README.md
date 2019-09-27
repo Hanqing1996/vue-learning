@@ -103,4 +103,9 @@ app.obj.b='b2';
 ```
 2. [Vue.set(app.obj, 'b', 2)](https://cn.vuejs.org/v2/guide/reactivity.html#%E6%A3%80%E6%B5%8B%E5%8F%98%E5%8C%96%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 
+#### [实例的生命周期钩子不要写成箭头函数,为什么？](https://cn.vuejs.org/v2/guide/instance.html#%E5%AE%9E%E4%BE%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90)
+
+
+#### 生命周期图示
+![img](https://cn.vuejs.org/images/lifecycle.png)
 
