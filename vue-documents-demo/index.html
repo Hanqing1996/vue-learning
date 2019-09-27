@@ -10,28 +10,25 @@
 </head>
 
 <body>
-    <!-- <div id="app"> -->
-        <!-- 为组件的title属性赋值 -->
-        <button-counter title-name="this is a titles"></button-counter> 
-    <!-- </div> -->
+    <div id="app-5">
+        <p>{{ "message" }}</p>
+        <button v-on:click="reverseMessage">逆转消息</button>
+    </div>
 </body>
 
 <script>
-
-    Vue.component('button-counter', { 
-        props: ['titleName'],
-        data: function () {
-            return {
-                count: 0
-            }
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            message: 'Hello Vue.js!'
         },
-        template: '<button v-on:click="count++">{{title}} you clicked me {{ count }} times</button>'
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
     })
 
-    // var vm = new Vue({
-    //     el: "#app",
-    //     data: {}
-    // })
 </script>
 <style>
 </style>
