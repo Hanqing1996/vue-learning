@@ -10,27 +10,30 @@
 </head>
 
 <body>
-    <div id="app-5">
-        <p>{{ "message" }}</p>
-        <button v-on:click="reverseMessage">逆转消息</button>
+    <div id="app">
+        <span class=span-a>
+            {{obj.a}}
+        </span>
+        <span class=span-b>
+            {{obj.b}}
+        </span>
     </div>
 </body>
 
 <script>
-    var app5 = new Vue({
-        el: '#app-5',
+    var app = new Vue({
+        el: '#app',
         data: {
-            message: 'Hello Vue.js!'
-        },
-        methods: {
-            reverseMessage: function () {
-                this.message = this.message.split('').reverse().join('')
+            obj: {
+                a: 'a',
             }
-        }
+        },
     })
 
+    // app.obj.a = 'a2' 
+    app.obj.b = 'b'
+    app.obj.b = 'b2'
 </script>
-<style>
-</style>
-
 </html>
+<!-- 
+为什么去掉app.obj.a = 'a2'这句话，b就无法在页面上显示 -->
