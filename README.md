@@ -1,3 +1,13 @@
+#### [计算属性](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E7%BC%93%E5%AD%98-vs-%E6%96%B9%E6%B3%95)
+1. 我们可以将同一函数定义为一个方法而不是一个计算属性。两种方式的最终结果确实是完全相同的。然而，不同的是计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果（缓存），而不必再次执行函数。(重点：没有再次执行函数！)
+2. [methods和computed的区别](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
+答案:1 3
+
+#### [watch](https://cn.vuejs.org/v2/api/#watch)
+
+
+
+
 #### [v-bind](https://cn.vuejs.org/v2/guide/#%E5%A3%B0%E6%98%8E%E5%BC%8F%E6%B8%B2%E6%9F%93)
 下面几种写法等价
 ```
