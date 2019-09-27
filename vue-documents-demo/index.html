@@ -30,10 +30,8 @@
         },
     })
 
-    // app.obj.a = 'a2' 
-    app.obj.b = 'b'
-    app.obj.b = 'b2'
+    Vue.set(app.obj, 'b', '2')
+    // app.obj.a = 'a2'
+    // app.obj.b = 'b'
 </script>
 </html>
-<!-- 
-为什么去掉app.obj.a = 'a2'这句话，b就无法在页面上显示 -->

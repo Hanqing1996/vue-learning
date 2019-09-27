@@ -76,3 +76,31 @@ data={
 
 data.b='b2' // 视图不会有任何改变
 ```
+#### 如何实现：修改不在data中声明的属性来更新视图?
+```
+<div id="app">
+    <span class=span-a>
+        {{obj.a}}
+    </span>
+    <span class=span-b>
+        {{obj.b}}
+    </span>
+</div>
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        obj: {
+            a: 'a',
+        }
+    },
+})
+```
+1. [通过修改obj.a顺便更新obj.b](https://www.zhihu.com/search?q=%E6%96%B9%E5%BA%94%E6%9D%AD%20vue%E8%87%AA%E6%B5%8B%E9%A2%98&type=content)
+```
+app.obj.a='a2';
+app.obj.b='b2';
+```
+2. [Vue.set(app.obj, 'b', 2)](https://cn.vuejs.org/v2/guide/reactivity.html#%E6%A3%80%E6%B5%8B%E5%8F%98%E5%8C%96%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+
+
