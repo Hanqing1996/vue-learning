@@ -12,11 +12,11 @@
 <body>
     <div id="app">
         <span>
-            {{count}}
+            {{obj.count}}
         </span>
         <div>
-            <button @click="count+=1">+1</button>
-            <button @click="count-=1">-1</button>
+            <button @click="obj.count+=1">+1</button>
+            <button @click="obj.count-=1">-1</button>
         </div>
         <div>
             你改了 {{modified}} 次
@@ -28,15 +28,15 @@
     var app = new Vue({
         el: '#app',
         data: {
-            count: 1,
+            obj: { count: 1 },
             modified: 0
         },
         watch: {
-            count() {
+            'obj.count':function(){ 
                 this.modified += 1
             }
-        }
-    })
+    }
+})
 
 </script>
 

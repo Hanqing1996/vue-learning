@@ -4,9 +4,26 @@
 答案:1 3
 
 #### [watch](https://cn.vuejs.org/v2/api/#watch)
+1. a的变化导致b的变化
+``` 
+var vm = new Vue({
+  data: {
+    a: 1,
+    b: 2,
+  },
+  watch: {
 
-
-
+    // oldVal为a变化前的值，val为a变化后的值
+    a: function (val, oldVal) {
+        
+        // b在a变化后随之变化
+        this.b=val
+    },
+```    
+2. [测试题1](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
+答案:4
+3. [测试题2](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
+答案: 'obj.count':function(){
 
 #### [v-bind](https://cn.vuejs.org/v2/guide/#%E5%A3%B0%E6%98%8E%E5%BC%8F%E6%B8%B2%E6%9F%93)
 下面几种写法等价
