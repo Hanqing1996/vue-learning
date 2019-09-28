@@ -1,7 +1,37 @@
-#### [计算属性](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E7%BC%93%E5%AD%98-vs-%E6%96%B9%E6%B3%95)
-1. 我们可以将同一函数定义为一个方法而不是一个计算属性。两种方式的最终结果确实是完全相同的。然而，不同的是计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果（缓存），而不必再次执行函数。(重点：没有再次执行函数！)
-2. [methods和computed的区别](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
+#### [用 key 管理可复用的元素](https://cn.vuejs.org/v2/guide/conditional.html#%E7%94%A8-key-%E7%AE%A1%E7%90%86%E5%8F%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E5%85%83%E7%B4%A0)
+
+#### [计算属性](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7)
+* 典型用法:
+```
+var vm = new Vue({
+  el: '#example',
+  data: {
+    message: 'Hello'
+  },
+  computed: {
+    
+    // message是需要侦听的值。message变化后，reversedMessage这一计算属性的值将随之变化，注意这与watch的机制相反
+    reversedMessage: function () {
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
+```
+* [计算属性缓存 vs 方法](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E7%BC%93%E5%AD%98-vs-%E6%96%B9%E6%B3%95)
+1. 我们可以将同一函数定义为一个方法而不是一个计算属性。两种方式的最终结果确实是完全相同的。
+2. 然而，不同的是计算属性是基于它们的响应式依赖进行 **缓存**的。只在相关响应式依赖发生改变时它们才会重新求值。
+3. 这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果（缓存），而不必再次执行函数。(**重点：没有再次执行函数！**)。总之，缓存是计算属性的最大优势。
+4. [测试题目](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
 答案:1 3
+* [计算属性 vs 侦听属性](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7-vs-%E4%BE%A6%E5%90%AC%E5%B1%9E%E6%80%A7)
+如果a,b,c,d的变化都会引起e的变化,则应该把e设置为计算属性
+```
+computed: {
+    e:function(){
+        return this.a+this.b+this.c
+    }
+}
+```
 
 #### [watch](https://cn.vuejs.org/v2/api/#watch)
 1. a的变化导致b的变化
@@ -13,7 +43,7 @@ var vm = new Vue({
   },
   watch: {
 
-    // oldVal为a变化前的值，val为a变化后的值
+    // a为需要侦听的值;oldVal为a变化前的值，val为a变化后的值
     a: function (val, oldVal) {
         
         // b在a变化后随之变化
@@ -25,8 +55,66 @@ var vm = new Vue({
 3. [测试题2](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
 答案: 'obj.count':function(){
 
+#### [vm.$watch(expOrFn,callback,[options])](https://cn.vuejs.org/v2/api/#vm-watch)
+* 典型用法:类似于watch
+```
+    <div id="app">
+        <div>{{a}}</div>
+        <button @click="b+=1">{{b}}</button>
+    </div>
+
+        var app = new Vue({
+        el: '#app',
+        data: {
+            a: 1,
+            b: 2
+        }
+    })
+
+    var unwatch=app.$watch(
+        'b', // 监听b的变化
+
+        // 回调函数,在b变化后执行
+        function (newVal) {
+            this.a = newVal;
+
+            // 取消watch
+            if(unwatch) unwatch()
+        }
+    )
+```
+* {deep:true}用于侦听一个对象的所有属性变化
+```
+    <div id="app">
+        <span>
+            {{obj.a}} {{obj.b}} {{obj.c}}
+        </span>
+        <div>
+            <button @click="obj.a+=1">a+1</button>
+            <button @click="obj.b+=1">b+1</button>
+            <button @click="obj.c+=1">c+1</button>
+        </div>
+        <div>
+            你改了 {{modified}} 次
+        </div>
+    </div>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    modified: 0,
+    obj: {a:1,b:2,c:3}
+  },
+  created(){
+      this.$watch('obj', ()=>{
+        this.modified += 1
+      },{deep:true})
+  }
+})
+```
+
 #### [v-bind](https://cn.vuejs.org/v2/guide/#%E5%A3%B0%E6%98%8E%E5%BC%8F%E6%B8%B2%E6%9F%93)
-下面几种写法等价
+1. 下面几种写法等价
 ```
 :title="message"
 
@@ -36,6 +124,10 @@ v-bind:title="message"
 
 v-bind:title=message
 ```
+2. [class与style绑定](https://cn.vuejs.org/v2/guide/class-and-style.html)
+
+
+
 
 #### [v-if和v-show的区别](https://cn.vuejs.org/v2/guide/conditional.html#v-if-vs-v-show)
 * 用户看不见该 p 元素是因为该 p 元素没有出现在 DOM 结构中
@@ -64,14 +156,26 @@ v-bind:title=message
         }
     })
 ```
+* v-show 不支持 <template> 元素，也不支持 v-else。
+* 一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
 
 #### [v-for](https://cn.vuejs.org/v2/guide/list.html)
-下面几种写法等价
+* 下面几种写法等价
 ```
 <div v-for="item of items"></div>
 
 <div v-for="item in items"></div>
 ```
+* 在遍历对象时，会按 Object.keys() 的结果遍历，但是不能保证它的结果在不同的 JavaScript 引擎下都一致。
+* [key](https://cn.vuejs.org/v2/guide/list.html#%E7%BB%B4%E6%8A%A4%E7%8A%B6%E6%80%81)
+尽可能在使用 v-for 时提供 key attribute,否则会出现[bug](https://xiedaimala.com/tasks/f83b3e01-4b93-41e2-959a-5fd74b961214/quizzes/edfcb224-712f-4f3d-9a6d-51e625b45288)
+```
+<div v-for="item in items" v-bind:key="item.id">
+  <!-- 内容 -->
+</div>
+```
+
+
 #### [Vue 不支持 IE8 及以下版本](https://cn.vuejs.org/v2/guide/installation.html)
 
 #### [vue2.5的构建版本](https://xiedaimala.com/tasks/ac386daf-a72d-410e-9347-5fe6ed8e967a/quizzes/cb843243-dbba-4b52-b4de-a98452ec6e0d)
@@ -131,7 +235,6 @@ app.obj.b='b2';
 2. [Vue.set(app.obj, 'b', 2)](https://cn.vuejs.org/v2/guide/reactivity.html#%E6%A3%80%E6%B5%8B%E5%8F%98%E5%8C%96%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 
 #### [实例的生命周期钩子不要写成箭头函数,为什么？](https://cn.vuejs.org/v2/guide/instance.html#%E5%AE%9E%E4%BE%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90)
-![1](/source/lifecycle.png)
 
 
 

@@ -37,74 +37,6 @@ yarn serve
 
 
 
-#### v-if与v-show
-```
-<div id="app">
-    <div v-if="active">if</div>
-
-    <div v-show="ok">show</div>
-</div>
-```
-```
-var app = new Vue({
-    el: '#app',
-    data: {
-        active:false,
-        ok:false
-    }
-})
-```
-带有v-show的DOM节点始终存在，只是将 display 属性在 block 和 none 来回切换；一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。而v-if会控制这个 DOM 节点的存在与否。当我们需要经常切换某个元素的显示/隐藏时，使用v-show会更加节省性能上的开销；当只需要一次显示或隐藏时，使用v-if更加合理。
-```
-<div>
-    <div style="display: none;">show</div>
-</div>    
-```
-
-#### v-for的父作用域
-```
-<ul id="example-2">
-  <li v-for="(item, index) in items">
-    {{ parentMessage }} - {{ index }} - {{ item.message }}
-  </li>
-</ul>
-```
-```
-var example2 = new Vue({
-  el: '#example-2',
-  data: {
-
-    // 父作用域  
-
-    parentMessage: 'Parent',
-    items: [
-      { message: 'Foo' },
-      { message: 'Bar' }
-    ]
-  }
-})
-```
-#### 用 v-for 来遍历一个对象的属性
-```
-
-<ul id="v-for-object" class="demo">
-  <li v-for="value in object">
-    {{ value }}
-  </li>
-</ul>
-```
-```
-new Vue({
-  el: '#v-for-object',
-  data: {
-    object: {
-      title: 'How to do lists in Vue',
-      author: 'Jane Doe',
-      publishedAt: '2016-04-10'
-    }
-  }
-})
-```
 #### 组件与new Vue
 * 应该把app看作一个组件
 ```
@@ -338,23 +270,12 @@ new Vue({
     })
 ```
 
-#### 
+#### 各文件作用
 * public:部署在生产环境中的文件
 * src：开发目录
 * src/App.vue:入口文件
 * src/components/HellowWorld.vue:单文件组件
 
-#### 组件名规范
-1. 不使用模板字符串
-```
-Vue.component('blog-post', {
-
-  props: ['postTitle'],
-  template: '<h3>{{ postTitle }}</h3>'
-})
-
-<blog-post post-title="hello!"></blog-post>
-```
 
 
 

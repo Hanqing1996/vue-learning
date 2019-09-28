@@ -11,16 +11,15 @@
 
 <body>
     <div id="app">
-        <span>
-            {{obj.count}}
-        </span>
-        <div>
-            <button @click="obj.count+=1">+1</button>
-            <button @click="obj.count-=1">-1</button>
-        </div>
-        <div>
-            你改了 {{modified}} 次
-        </div>
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address">
+        </template>
+        <button @click="toggle">toggle loginType</button>
     </div>
 </body>
 
@@ -28,16 +27,15 @@
     var app = new Vue({
         el: '#app',
         data: {
-            obj: { count: 1 },
-            modified: 0
+            loginType: 'username'
         },
-        watch: {
-            'obj.count':function(){ 
-                this.modified += 1
+        methods: {
+            toggle(){
+                if(this.loginType=='useremail') this.loginType='username'
+                if(this.loginType=='username') this.loginType='useremail'
             }
-    }
-})
-
+        }
+    })
 </script>
 
 </html>
