@@ -10,27 +10,46 @@
 </head>
 
 <body>
-    <div id="father">
-        <blog-post>
-
-
-        </blog-post>
+    <div id="todo-list-example">
+        <ul>
+            <li is="todo-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.title"></li>
+        </ul>
     </div>
 </body>
 
 <script>
 
-    Vue.component('blog-post', {
-        template: `<div><slot><blog-post2 postTitle="haha">{{ postTitle }}</blog-post2></slot><>
+    Vue.component('todo-item', {
+        template: '\
+    <li>\
+      {{ title }}\
+    </li>\
+  ',
+        props: ['title']
     })
 
-    Vue.component('blog-post2', {
-        props: ['postTitle']
-    })
+    new Vue({
+        el: '#todo-list-example',
+        data: {
+            // todos: [{ title: "libai", id=1 }, { title: "hezhizhang", id=2 }],
 
-    var vm = new Vue({
-        el: "#father",
-        data: {},
+            todos: [
+                {
+                    id: 1,
+                    title: 'Do the dishes',
+                },
+                {
+                    id: 2,
+                    title: 'Take out the trash',
+                },
+                {
+                    id: 3,
+                    title: 'Mow the lawn'
+                }
+            ],
+        },
+        methods: {
+        }
     })
 </script>
 

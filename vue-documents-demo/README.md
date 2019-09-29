@@ -202,17 +202,17 @@ yarn serve
 ```
 ```
   Vue.component('child', {
-        props: ['val'],
+        props: ['val'], // 这个val是子组件vm作用域中的val
         data: function () {
             return {}
         },
-        template: '<div>{{val}}</div>',
+        template: '<div>{{val}}</div>', 
     })
 
     var vm = new Vue({
         el: "#father",
         data: {
-            val:"父组件的值"
+            val:"父组件的值" // 这个val是父组件vm作用域中的val
         },
   })
 ```

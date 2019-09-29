@@ -21,7 +21,7 @@ var vm = new Vue({
 1. 我们可以将同一函数定义为一个方法而不是一个计算属性。两种方式的最终结果确实是完全相同的。
 2. 然而，不同的是计算属性是基于它们的响应式依赖进行 **缓存**的。只在相关响应式依赖发生改变时它们才会重新求值。
 3. 这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果（缓存），而不必再次执行函数。(**重点：没有再次执行函数！**)。总之，缓存是计算属性的最大优势。
-4. [测试题目](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
+4. [测试题3](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
 答案:1 3
 * [计算属性 vs 侦听属性](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7-vs-%E4%BE%A6%E5%90%AC%E5%B1%9E%E6%80%A7)
 如果a,b,c,d的变化都会引起e的变化,则应该把e设置为计算属性
@@ -50,9 +50,9 @@ var vm = new Vue({
         this.b=val
     },
 ```    
-2. [测试题1](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
+2. [测试题4](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
 答案:4
-3. [测试题2](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
+3. [测试题5](https://xiedaimala.com/tasks/739a1661-e5b5-4734-ac53-eb277f1a905f/quizzes/7f8086f9-5cd5-4a72-b58d-a79bb8e2e6ff)
 答案: 'obj.count':function(){
 
 #### [vm.$watch(expOrFn,callback,[options])](https://cn.vuejs.org/v2/api/#vm-watch)
@@ -114,7 +114,8 @@ var app = new Vue({
 ```
 
 #### [v-bind](https://cn.vuejs.org/v2/guide/#%E5%A3%B0%E6%98%8E%E5%BC%8F%E6%B8%B2%E6%9F%93)
-1. 下面几种写法等价
+* bind绑定的是属性（key,title,style,class），而非数据。
+* 下面几种写法等价
 ```
 :title="message"
 
@@ -124,10 +125,7 @@ v-bind:title="message"
 
 v-bind:title=message
 ```
-2. [class与style绑定](https://cn.vuejs.org/v2/guide/class-and-style.html)
-
-
-
+* [class与style绑定](https://cn.vuejs.org/v2/guide/class-and-style.html)
 
 #### [v-if和v-show的区别](https://cn.vuejs.org/v2/guide/conditional.html#v-if-vs-v-show)
 * 用户看不见该 p 元素是因为该 p 元素没有出现在 DOM 结构中
@@ -160,6 +158,31 @@ v-bind:title=message
 * 一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
 
 #### [v-for](https://cn.vuejs.org/v2/guide/list.html)
+* 渲染效果
+```
+<ul id="example-1">
+    <li v-for="item in items" v-bind:key="item.id">
+        {{ item.message }}
+    </li>
+</ul>
+
+var example1 = new Vue({
+    el: '#example-1',
+    data: {
+        items: [
+            { message: 'Foo', id:1 },
+            { message: 'Bar', id:2 }
+        ]
+    }
+})
+```
+渲染为
+```
+<ul id="example-1">
+    <li>Foo</li>
+    <li>Bar</li>
+</ul>
+```
 * 下面几种写法等价
 ```
 <div v-for="item of items"></div>
@@ -167,14 +190,61 @@ v-bind:title=message
 <div v-for="item in items"></div>
 ```
 * 在遍历对象时，会按 Object.keys() 的结果遍历，但是不能保证它的结果在不同的 JavaScript 引擎下都一致。
-* [key](https://cn.vuejs.org/v2/guide/list.html#%E7%BB%B4%E6%8A%A4%E7%8A%B6%E6%80%81)
-尽可能在使用 v-for 时提供 key attribute,否则会出现[bug](https://xiedaimala.com/tasks/f83b3e01-4b93-41e2-959a-5fd74b961214/quizzes/edfcb224-712f-4f3d-9a6d-51e625b45288)
+* [设置数组项不能用vm.items[indexOfItem] = newValue](https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+应该用
 ```
-<div v-for="item in items" v-bind:key="item.id">
-  <!-- 内容 -->
-</div>
+vm.$set(vm.items, indexOfItem, newValue)
 ```
 
+#### 在组件上使用 v-for 时，[key](https://cn.vuejs.org/v2/guide/list.html#%E7%BB%B4%E6%8A%A4%E7%8A%B6%E6%80%81) 是必须的
+* key是用来维护数据状态的，对于数据的静态展示，其实不需要key和item.id
+```
+<ul id="example-1">
+    <li v-for="item in items">
+        {{ item.message }}
+    </li>
+</ul>
+
+var example1 = new Vue({
+    el: '#example-1',
+    data: {
+        items: [
+            { message: 'Foo'},
+            { message: 'Bar'}
+        ]
+    }
+})
+```
+
+#### [在组件中使用v-for](https://cn.vuejs.org/v2/guide/list.html#%E5%9C%A8%E7%BB%84%E4%BB%B6%E4%B8%8A%E4%BD%BF%E7%94%A8-v-for)
+* 下面的写法是错误的,因为[child不是ul的有效内容](https://cn.vuejs.org/v2/guide/components.html#%E8%A7%A3%E6%9E%90-DOM-%E6%A8%A1%E6%9D%BF%E6%97%B6%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+```
+ <ul id="app">
+    <child v-for="item in items"  v-bind:key="item.id" v-bind:name="item.name"></child>
+</div>
+```
+* 正确姿势(使用is)
+```
+ <div id="app">
+    <ul>
+        <li is="child" v-for="item in items"  v-bind:key="item.id" v-bind:name="item.name"></li>
+        </tr>
+    </ul>
+</div>
+
+
+Vue.component('child', {
+    template: '<div>{{name}}</div>',
+    props: ['name'] // 迭代数据是不会自动由vue实例传递到组件里的（"不自动将 item 注入到组件里"）。因此我们需要使用 prop
+})
+
+new Vue({
+    el: '#app',
+    data: {
+        items: [{ name: "libai", id: 1 }, { name: "dufu", id: 2 }]
+    }
+})
+```
 
 #### [Vue 不支持 IE8 及以下版本](https://cn.vuejs.org/v2/guide/installation.html)
 
