@@ -11,31 +11,24 @@
 
 <body>
     <div id="app">
-        <child @click="clickChild(a,$event)"></child>
+        <select v-model="selected">
+            <option v-bind:value="{ number: 123 }">123</option>
+            <option v-bind:value="{ number: 124 }">124</option>
+        </select>
+
+        <!--这里的selected是data中的selected，将随用户所选项的变动而变动-->
+        <span>Selected: {{ selected }}</span>
     </div>
 </body>
 
 <script>
-    Vue.component('child', {
-        data: function () {
-            return {}
-        },
-        template: '<button @click="clickButton">点我</button>',
-        methods: {
-            clickButton() {
-                this.$emit('click', 1,2)
-            }
-        }
-    })
 
-    var example1 = new Vue({
+    new Vue({
         el: '#app',
         data: {
-        },
-        methods: {
-            clickChild(i,e) {
-                console.log(e); // 1
-            }
+
+            // 默认B被选中
+            selected: '',
         }
     })
 </script>
