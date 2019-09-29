@@ -157,7 +157,7 @@ yarn serve
 * 因为值的传递不仅需要"父组件接收到子组件的值"这一结果，还需要知道"这个值是哪个子组件给我的",那么将事件绑定在button-counter上就像在父亲面前放了三个孩子的手机，谁打电话过来一目了然
 ```
     <div id="app">
-        
+        {{text}}
         <button-counter @click="clickButtonCounter(1,$event)"></button-counter>
         <button-counter @click="clickButtonCounter(2,$event)"></button-counter>
         <button-counter @click="clickButtonCounter(3,$event)"></button-counter>
@@ -192,64 +192,6 @@ yarn serve
                 this.text = e;
             }
         }
-    })
-```
-#### v-bind和props用于父组件给子组件传值
-```
-    <div id="father">
-        <child :val="val"></child>      
-    </div>
-```
-```
-  Vue.component('child', {
-        props: ['val'], // 这个val是子组件vm作用域中的val
-        data: function () {
-            return {}
-        },
-        template: '<div>{{val}}</div>', 
-    })
-
-    var vm = new Vue({
-        el: "#father",
-        data: {
-            val:"父组件的值" // 这个val是父组件vm作用域中的val
-        },
-  })
-```
-
-##### 报错:Property or method "text" is not defined
-```
-    <div id="app">
-        {{text}}
-    </div>
-```
-```
- var vm = new Vue({
-        el: "#app",
-        data: {
-            // text没有初始化
-        },
-    })
-```
-#### 插槽:往组件里插入内容 
-```
-    <div id="father">
-        <child>
-           <h1>插槽里的内容</h1>
-        </child>      
-    </div>
-```
-```
-    Vue.component('child', {
-        data: function () {
-            return {}
-        },
-        template: '<div><slot></slot></div>',
-    })
-
-    var vm = new Vue({
-        el: "#father",
-        data: {},
     })
 ```
 #### 组件局部注册

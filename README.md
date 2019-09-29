@@ -125,7 +125,39 @@ v-bind:title="message"
 
 v-bind:title=message
 ```
-* [class与style绑定](https://cn.vuejs.org/v2/guide/class-and-style.html)
+* [使用v-on绑定class与style](https://cn.vuejs.org/v2/guide/class-and-style.html)
+
+#### $event
+* 对于原生元素（如 button、input）来说，$event 是原始的 DOM 事件
+* 对于自定义组件（如 child）来说，$event 是其自身 $emit 发出的第二个参数
+```
+    <div id="app">
+        <child @click="clickChild(a,$event)"></child>
+    </div>
+
+    Vue.component('child', {
+        data: function () {
+            return {}
+        },
+        template: '<button @click="clickButton">点我</button>',
+        methods: {
+            clickButton() {
+                this.$emit('click', 1,2) // $emit的第二个参数为$event
+            }
+        }
+    })
+
+    var example1 = new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+            clickChild(e) {
+                console.log(e); // 1，说明$event值为1
+            }
+        }
+    })
+```
 
 #### [v-if和v-show的区别](https://cn.vuejs.org/v2/guide/conditional.html#v-if-vs-v-show)
 * 用户看不见该 p 元素是因为该 p 元素没有出现在 DOM 结构中
@@ -196,7 +228,7 @@ var example1 = new Vue({
 vm.$set(vm.items, indexOfItem, newValue)
 ```
 
-#### 在组件上使用 v-for 时，[key](https://cn.vuejs.org/v2/guide/list.html#%E7%BB%B4%E6%8A%A4%E7%8A%B6%E6%80%81) 是必须的
+#### key
 * key是用来维护数据状态的，对于数据的静态展示，其实不需要key和item.id
 ```
 <ul id="example-1">
@@ -215,6 +247,7 @@ var example1 = new Vue({
     }
 })
 ```
+* 在组件上使用 v-for 时,key是必须的
 
 #### [在组件中使用v-for](https://cn.vuejs.org/v2/guide/list.html#%E5%9C%A8%E7%BB%84%E4%BB%B6%E4%B8%8A%E4%BD%BF%E7%94%A8-v-for)
 * 下面的写法是错误的,因为[child不是ul的有效内容](https://cn.vuejs.org/v2/guide/components.html#%E8%A7%A3%E6%9E%90-DOM-%E6%A8%A1%E6%9D%BF%E6%97%B6%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
@@ -228,15 +261,14 @@ var example1 = new Vue({
  <div id="app">
     <ul>
         <li is="child" v-for="item in items"  v-bind:key="item.id" v-bind:name="item.name"></li>
-        </tr>
     </ul>
 </div>
 
 
 Vue.component('child', {
     template: '<div>{{name}}</div>',
-    props: ['name'] // 迭代数据是不会自动由vue实例传递到组件里的（"不自动将 item 注入到组件里"）。因此我们需要使用 prop
-})
+    props: ['name'] // 迭代数据是不会自动由vue实例传递到组件里的（"不自动将 item 注入到组件里"）。因此我们需要使用 prop,
+}
 
 new Vue({
     el: '#app',
@@ -244,6 +276,51 @@ new Vue({
         items: [{ name: "libai", id: 1 }, { name: "dufu", id: 2 }]
     }
 })
+```
+
+#### v-bind和props用于父组件给子组件传值
+```
+    <div id="father">
+        <child :val="val"></child>      
+    </div>
+```
+```
+  Vue.component('child', {
+        props: ['val'], // 这个val是子组件vm作用域中的val
+        data: function () {
+            return {}
+        },
+        template: '<div>{{val}}</div>', 
+    })
+
+    var vm = new Vue({
+        el: "#father",
+        data: {
+            val:"父组件的值" // 这个val是父组件vm作用域中的val
+        },
+  })
+```
+
+#### slot(插槽):往组件里插入内容 
+```
+    <div id="father">
+        <child>
+           <h1>插槽里的内容</h1>
+        </child>      
+    </div>
+```
+```
+    Vue.component('child', {
+        data: function () {
+            return {}
+        },
+        template: '<div><slot></slot></div>', // 在这里指明插槽的位置
+    })
+
+    var vm = new Vue({
+        el: "#father",
+        data: {},
+    })
 ```
 
 #### [Vue 不支持 IE8 及以下版本](https://cn.vuejs.org/v2/guide/installation.html)

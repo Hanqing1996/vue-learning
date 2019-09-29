@@ -10,45 +10,43 @@
 </head>
 
 <body>
-    <div id="todo-list-example">
-        <ul>
-            <li is="todo-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.title"></li>
-        </ul>
+    <div id="app">
+        {{text}}
+        <button-counter @click="clickButtonCounter(1,$event)"></button-counter>
+        <button-counter @click="clickButtonCounter(2,$event)"></button-counter>
+        <button-counter @click="clickButtonCounter(3,$event)"></button-counter>
     </div>
 </body>
 
 <script>
 
-    Vue.component('todo-item', {
-        template: '\
-    <li>\
-      {{ title }}\
-    </li>\
-  ',
-        props: ['title']
+    Vue.component('button-counter', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button  @click="clickButton"> you clicked me {{ count }} times</button>',
+        methods: {
+            clickButton: function () {
+                this.count++;
+
+                // 触发button-counter的click事件
+                this.$emit('click',["当前这个button-counter给app的值","and something else"]);
+            }
+        }
     })
 
-    new Vue({
-        el: '#todo-list-example',
+    var vm = new Vue({
+        el: "#app",
         data: {
-            // todos: [{ title: "libai", id=1 }, { title: "hezhizhang", id=2 }],
-
-            todos: [
-                {
-                    id: 1,
-                    title: 'Do the dishes',
-                },
-                {
-                    id: 2,
-                    title: 'Take out the trash',
-                },
-                {
-                    id: 3,
-                    title: 'Mow the lawn'
-                }
-            ],
+            text: ""
         },
         methods: {
+            clickButtonCounter: function (i, e) {
+                console.log(e);
+                this.text = i;
+            }
         }
     })
 </script>

@@ -10,21 +10,32 @@
 </head>
 
 <body>
-    <ul id="example-1">
-        <li v-for="item in items" v-bind:key="item.id">
-            {{ item.message }}
-        </li>
-    </ul>
+    <div id="app">
+        <child @click="clickChild(a,$event)"></child>
+    </div>
 </body>
 
 <script>
+    Vue.component('child', {
+        data: function () {
+            return {}
+        },
+        template: '<button @click="clickButton">点我</button>',
+        methods: {
+            clickButton() {
+                this.$emit('click', 1,2)
+            }
+        }
+    })
+
     var example1 = new Vue({
-        el: '#example-1',
+        el: '#app',
         data: {
-            items: [
-                { message: 'Foo', id:1 },
-                { message: 'Bar', id:2 }
-            ]
+        },
+        methods: {
+            clickChild(i,e) {
+                console.log(e); // 1
+            }
         }
     })
 </script>
