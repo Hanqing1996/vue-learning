@@ -240,7 +240,7 @@ Vue.component('button-counter', options) 可以全局注册一个组件
 2. el是根实例特有的选项。所以options不包括el
 3. 这里的 options.data 选项必须是一个函数 
 
-#### $emit
+#### $emit：实现子组件向父组件传递数据
 ```
 <div id="emit-example-simple">
   <welcome-button v-on:welcome="sayHi"></welcome-button>

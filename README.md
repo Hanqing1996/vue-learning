@@ -1,3 +1,13 @@
+#### ceitical part
+* 父组件向子组件传递数据
+```
+父组件.data/propsData + 子组件.v-bind + 子组件.props[''] 
+```
+* 子组件向父组件传递数据
+```
+子组件.$emit(father-event)+父组件.v-on:father-event
+```
+
 #### [vue风格指南](https://cn.vuejs.org/v2/style-guide/)
 * 自闭合组件
 * 
@@ -15,6 +25,23 @@
 * vm.$watch(expOrFn,callback,[options])
  
 #### [Vue 实例 & 模板语法](https://github.com/Hanqing1996/vue-learning/tree/master/Vue%20%E5%AE%9E%E4%BE%8B%20%26%20%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95)
+* 在组件外部使用v-bind绑定的属性
+```
+<div id="app">
+        <child :id="oneValueIndata"></child>
+    </div>
+```
+* 在组件内部使用v-bind绑定的属性
+```
+     Vue.component('child', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<div v-bind:id="componentId">something</div>',
+    })
+```
 * [var vm = new Vue(options),options可以包含哪些 key？](https://cn.vuejs.org/v2/api/#%E9%80%89%E9%A1%B9-%E6%95%B0%E6%8D%AE) 
 * [实例的生命周期钩子不要写成箭头函数,为什么？](https://cn.vuejs.org/v2/guide/instance.html#%E5%AE%9E%E4%BE%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90)
 * vue实例的data属性
@@ -46,7 +73,7 @@
 * v-model语法糖原理
 * v-model 用到自定义组件上
 * 全局注册组件
-* $emit
+* $emit：实现子组件向父组件传递数据
 * 动态组件：使component在不同组件之间进行动态切换
 
 #### [组件注册 & Prop](https://github.com/Hanqing1996/vue-learning/tree/master/%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C%20%26%20Prop)
@@ -58,7 +85,12 @@
 
 
 #### [自定义事件 & 插槽 & 动态组件 & 异步组件](https://github.com/Hanqing1996/vue-learning/tree/master/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6%20%26%20%E6%8F%92%E6%A7%BD%20%26%20%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6%20%26%20%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6)
+* 事件名的大小写
 * slot怎么用
+* .sync 修饰符：用于实现子组件更新父组件的props
+* .sync语法糖原理
+* 如果 <navigation-link> 没有包含一个 <slot> 元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃。
+* 使用具名插槽 <slot name="xxx'> 可以实现一个组件拥有多个插槽]
 
 
 

@@ -66,7 +66,7 @@
 * 组件外部的v-bind优先级更高
 ```
   <div id="app">
-      <child v-bind:id="conponentId"></child>
+      <child v-bind:id="componentId"></child>
     </div>
 
      Vue.component('child', {
@@ -81,7 +81,7 @@
     var vm = new Vue({
         el: "#app",
         data: {
-            conponentId:"aa",
+            componentId:"aa",
             templateId:"bb"
         },
     })

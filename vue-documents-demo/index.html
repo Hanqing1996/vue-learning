@@ -11,22 +11,26 @@
 
 <body>
     <div id="app">
-        <blog-post v-bind:id="post.id" v-bind:title="post.title"></blog-post>
+        <text-document v-bind:title.sync="doc.title"></text-document>
     </div>
 </body>
 
 <script>
-    Vue.component('blog-post', {
-        props: ['id','title'],
-        template: '<div>{{id}}{{title}}</div>',
+    Vue.component('text-document', {
+        template: '<div>haha</div>',
+        props: ['title'],
+        template: `
+        <button v-on:click="$emit('update:title','changedFatherTitle')">{{title}}</button>
+        `
     })
+
+
 
     new Vue({
         el: '#app',
         data: {
-            post: {
-                id: 1,
-                title: 'My Journey with Vue'
+            doc: {
+                title: "fatherTitle"
             }
         }
     })
