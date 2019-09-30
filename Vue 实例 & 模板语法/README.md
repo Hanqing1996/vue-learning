@@ -90,22 +90,3 @@
 ```
 <div id="aa">something</div>
 ```
-
-#### 为在template中声明的HTML元素添加属性(Id,value,class等等)
-```
-<custom-input v-bind:value="oneValue"></custom-input>
-
-Vue.component('custom-input', {
-      template: ‘<input type="text">’
-    })
-
-    new Vue({
-        el: '#app',
-        data: {
-        }
-    })
-```
-渲染结果
-```
-
-```

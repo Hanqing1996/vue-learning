@@ -1,4 +1,4 @@
-#### ceitical part
+#### 父子组件通信 
 * 父组件向子组件传递数据
 ```
 父组件.data/propsData + 子组件.v-bind + 子组件.props[''] 
@@ -7,6 +7,74 @@
 ```
 子组件.$emit(father-event)+父组件.v-on:father-event
 ```
+
+#### Vue实例与组件的区别
+* 能正常渲染，渲染结果为<span id="idValue"><span>
+```
+<div id="app">
+    <div id="idValue"></div>
+<div>
+
+ var vm = new Vue({
+        el: "#app",
+        data: {
+        },
+    })
+```
+* 能正常渲染，渲染结果为<span id="idValue"><span>
+```
+<div id="app">
+    <child id="idValue"></child>
+</div>
+
+Vue.component('child', {
+    data: function () {
+        return {
+        }
+    },
+    template: '<span></span>',
+})
+
+new Vue({
+    el: '#app',
+    data: {
+    }
+})
+```
+* 不能正常渲染，看不见"somt thing"，因为template里面没有放置插槽
+```
+    <div id="app">
+        <child>somt thing</child>
+    </div>
+
+    Vue.component('child', {
+        data: function () {
+            return {
+            }
+        },
+        template: '<div></div>',
+        })
+
+    new Vue({
+        el: '#app',
+        data: {
+        }
+    })
+```
+* 能正常渲染，看见"somt thing"
+```
+    <div id="app">
+        <span id="idValue">somt thing</span>
+    </div>
+
+    new Vue({
+        el: '#app',
+        data: {
+        }
+    })
+```
+
+
 
 #### [vue风格指南](https://cn.vuejs.org/v2/style-guide/)
 * 自闭合组件
@@ -52,7 +120,6 @@
 * v-bind绑定data里声明的属性
 * 在子组件外部中使用v-bind绑定的属性必须在父组件的data对象中声明（或者用父组件的[propsData](https://cn.vuejs.org/v2/api/#propsData)）
 * 组件外部的v-bind与组件内部的v-bind
-* 为在template中声明的HTML元素添加属性(Id,value,class等等)
 
 #### [Class 与 Style 绑定 & 条件渲染](https://github.com/Hanqing1996/vue-learning/tree/master/Class%20%E4%B8%8E%20Style%20%E7%BB%91%E5%AE%9A%20%26%20%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93)
 * [使用v-bind绑定class与style](https://cn.vuejs.org/v2/guide/class-and-style.html)
