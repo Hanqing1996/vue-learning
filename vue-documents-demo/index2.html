@@ -10,23 +10,22 @@
 </head>
 
 <body>
+    <!-- ll -->
     <div id="app">
-        <custom-input :value="oneValue"></custom-input>
+        <blog-post prop-a="number"></blog-post>
     </div>
 </body>
 
 <script>
-
-    Vue.component('custom-input', {
-        template: `<input
-      type="text"
-    >`
+    Vue.component('blog-post', {
+        template: '<div>hh</div>'
     })
 
     new Vue({
+        props: ['number'],
         el: '#app',
         data: {
-            oneValue:"dd"
+            number: 1
         }
     })
 </script>

@@ -11,23 +11,23 @@
 
 <body>
     <div id="app">
-        <custom-input v-model="searchText"></custom-input>
-        {{searchText}}
+        <blog-post v-bind:id="post.id" v-bind:title="post.title"></blog-post>
     </div>
 </body>
 
 <script>
-    Vue.component('custom-input', {
-        template: `<input
-      type="text"
-      v-on:input="$emit('input', $event.target.value)"
-    >`
+    Vue.component('blog-post', {
+        props: ['id','title'],
+        template: '<div>{{id}}{{title}}</div>',
     })
 
     new Vue({
         el: '#app',
         data: {
-            searchText: "hh",
+            post: {
+                id: 1,
+                title: 'My Journey with Vue'
+            }
         }
     })
 </script>

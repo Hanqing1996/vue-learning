@@ -234,8 +234,6 @@ so，综上所述
     })
 ```
 
-
-
 #### 全局注册组件
 Vue.component('button-counter', options) 可以全局注册一个组件
 1. 因为组件是可复用的 Vue 实例，所以它们与 new Vue 接收**几乎**相同的选项，例如 data、computed、watch、methods 以及生命周期钩子等

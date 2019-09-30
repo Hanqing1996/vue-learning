@@ -1,3 +1,7 @@
+#### [vue风格指南](https://cn.vuejs.org/v2/style-guide/)
+* 自闭合组件
+* 
+
 #### [安装与介绍](https://github.com/Hanqing1996/vue-learning/tree/master/Vue%20%E5%AE%89%E8%A3%85%20%26%20%E4%BB%8B%E7%BB%8D)
 * [Vue 不支持 IE8 及以下版本](https://cn.vuejs.org/v2/guide/installation.html)
 * vue2.5的构建版本
@@ -17,10 +21,10 @@
 * 不在data中声明的属性如何更新视图
 * bind绑定的是属性（key,title,style,class），而非数据。
 * v-bind的几种等价写法
-* v-bind和props用于父组件给子组件传值
+* v-bind和props用于父组件给子组件传值（通信）
 * v-bind绑定data里声明的属性
-* 在<child>中使用v-bind绑定的属性必须在Vue实例的data对象中声明
-* <child>的v-bind与template的v-bind
+* 在子组件外部中使用v-bind绑定的属性必须在父组件的data对象中声明（或者用父组件的[propsData](https://cn.vuejs.org/v2/api/#propsData)）
+* 组件外部的v-bind与组件内部的v-bind
 * 为在template中声明的HTML元素添加属性(Id,value,class等等)
 
 #### [Class 与 Style 绑定 & 条件渲染](https://github.com/Hanqing1996/vue-learning/tree/master/Class%20%E4%B8%8E%20Style%20%E7%BB%91%E5%AE%9A%20%26%20%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93)
@@ -46,7 +50,11 @@
 * 动态组件：使component在不同组件之间进行动态切换
 
 #### [组件注册 & Prop](https://github.com/Hanqing1996/vue-learning/tree/master/%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C%20%26%20Prop)
-
+* Prop 的大小写
+* title="number"与v-bind:title="number"的区别
+* 传入一个布尔量
+* 传入一个对象的所有属性
+* 替换/合并已有的特性（从外部提供给组件的值vs组件内部设置好的值）
 
 
 #### [自定义事件 & 插槽 & 动态组件 & 异步组件](https://github.com/Hanqing1996/vue-learning/tree/master/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6%20%26%20%E6%8F%92%E6%A7%BD%20%26%20%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6%20%26%20%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6)

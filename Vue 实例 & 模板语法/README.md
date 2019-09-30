@@ -7,15 +7,15 @@
 #### v-bind和props用于父组件给子组件传值
 ```
     <div id="father">
-        <child :childval="fatherVal"></child>
+        <child :child-val="fatherVal"></child>
     </div>
 
     Vue.component('child', {
-        props: ['childval'], 
+        props: ['childVal'], 
         data: function () {
             return {}
         },
-        template: '<div>子组件得到了{{childval}}</div>',
+        template: '<div>子组件得到了{{childVal}}</div>',
     })
 
     var vm = new Vue({
@@ -44,7 +44,7 @@
 <span id="hh"><span>
 ```
 
-#### 在<child>中使用v-bind绑定的属性必须在Vue实例的data对象中声明
+#### 在子组件外部中使用v-bind绑定的属性必须在父组件的data对象中声明
 ```
     <div id="app">
         <child :id="oneValueIndata"></child>
@@ -62,8 +62,8 @@
     })
 ```
 
-#### <child>的v-bind与template的v-bind
-* <child>的v-bind优先级更高
+#### 组件外部的v-bind与组件内部的v-bind
+* 组件外部的v-bind优先级更高
 ```
   <div id="app">
       <child v-bind:id="conponentId"></child>
