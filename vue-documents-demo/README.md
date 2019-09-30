@@ -158,9 +158,9 @@ yarn serve
 ```
     <div id="app">
         {{text}}
-        <button-counter @click="clickButtonCounter(1,$event)"></button-counter>
-        <button-counter @click="clickButtonCounter(2,$event)"></button-counter>
-        <button-counter @click="clickButtonCounter(3,$event)"></button-counter>
+        <button-counter @transmit="clickButtonCounter(1,$event)"></button-counter>
+        <button-counter @transmit="clickButtonCounter(2,$event)"></button-counter>
+        <button-counter @transmit="clickButtonCounter(3,$event)"></button-counter>
     </div>
 ```
 ```
@@ -176,7 +176,7 @@ yarn serve
                 this.count++;
 
                 // 触发button-counter的click事件
-                this.$emit('click', "当前这个button-counter给app的值");
+                this.$emit('transmit', "当前这个button-counter给app的值");
             }
         }
     })

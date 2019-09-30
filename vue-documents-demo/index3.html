@@ -11,24 +11,18 @@
 
 <body>
     <div id="app">
-        <custom-input v-bind:value="searchText" v-on:input="searchText = $event"></custom-input>
-        {{searchText}}
+        <one :id="oneValueIndata"></one>
     </div>
 </body>
-
 <script>
-    Vue.component('custom-input', {
-        template: `<input
-      type="text"
-      v-on:input="$emit('input', $event.target.value)"
-    >`
+    Vue.component('one', {
+        template: '<span>kk</span>'
     })
 
     new Vue({
         el: '#app',
         data: {
-            searchText: "hh",
-            valu3e:"kk"
+            // oneValueIndata: "hh"
         }
     })
 </script>

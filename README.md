@@ -18,6 +18,10 @@
 * bind绑定的是属性（key,title,style,class），而非数据。
 * v-bind的几种等价写法
 * v-bind和props用于父组件给子组件传值
+* v-bind绑定data里声明的属性
+* 在<child>中使用v-bind绑定的属性必须在Vue实例的data对象中声明
+* <child>的v-bind与template的v-bind
+* 为在template中声明的HTML元素添加属性(Id,value,class等等)
 
 #### [Class 与 Style 绑定 & 条件渲染](https://github.com/Hanqing1996/vue-learning/tree/master/Class%20%E4%B8%8E%20Style%20%E7%BB%91%E5%AE%9A%20%26%20%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93)
 * [使用v-bind绑定class与style](https://cn.vuejs.org/v2/guide/class-and-style.html)
@@ -26,14 +30,20 @@
 #### [列表渲染 & 事件处理](https://github.com/Hanqing1996/vue-learning/tree/master/%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93%20%26%20%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86)
 * v-for
 * key
-* 在组件中使用v-for
+* 在组件中使用v-for(is怎么用)
 * $event
 
 #### [表单输入绑定 & 组件基础](https://github.com/Hanqing1996/vue-learning/tree/master/%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5%E7%BB%91%E5%AE%9A%20%26%20%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80)
-* v-model
-
-
-
+* HTML表单元素知识补充
+* v-model怎么用
+* 单选按钮(radio)
+* 复选框(checkbox)
+* 选择框(option)
+* v-model语法糖原理
+* v-model 用到自定义组件上
+* 全局注册组件
+* $emit
+* 
 
 #### [组件注册 & Prop](https://github.com/Hanqing1996/vue-learning/tree/master/%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C%20%26%20Prop)
 
@@ -43,7 +53,6 @@
 * slot怎么用
 
 
-#### [jj](https://www.baidu.com/)
 
 
 
