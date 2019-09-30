@@ -190,10 +190,27 @@ so，综上所述
 ```
 
 #### [v-model 用到自定义组件上](https://cn.vuejs.org/v2/guide/components-custom-events.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E7%9A%84-v-model)
-1.  保证input的value来自Vue实例data的searchText：v-bind:value="searchText"
-2. 
+1. 保证input的value来自Vue实例data的searchText：在<custom-input>中设置v-bind:value="searchText"
+2. 保证在触发input事件时，searchText的值与输入内容同步：利用$emit将在input中输入的内容传递给<custom-input>，再由custom-input修改searchText
 ```
+    <div id="app">
+        <custom-input v-model="searchText"></custom-input>
+        {{searchText}}
+    </div>
 
+     Vue.component('custom-input', {
+        template: `<input
+      type="text"
+      v-on:input="$emit('input', $event.target.value)"
+    >`
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            searchText: "hh",
+        }
+    })
 ```
 等价于
 ```

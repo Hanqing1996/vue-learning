@@ -43,7 +43,7 @@
 * v-model 用到自定义组件上
 * 全局注册组件
 * $emit
-* 
+* 动态组件：使component在不同组件之间进行动态切换
 
 #### [组件注册 & Prop](https://github.com/Hanqing1996/vue-learning/tree/master/%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C%20%26%20Prop)
 

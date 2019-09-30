@@ -11,7 +11,7 @@
 
 <body>
     <div id="app">
-        <custom-input v-bind:value="searchText" v-on:input="searchText = $event"></custom-input>
+        <custom-input v-model="searchText"></custom-input>
         {{searchText}}
     </div>
 </body>
@@ -28,7 +28,6 @@
         el: '#app',
         data: {
             searchText: "hh",
-            valu3e:"kk"
         }
     })
 </script>
