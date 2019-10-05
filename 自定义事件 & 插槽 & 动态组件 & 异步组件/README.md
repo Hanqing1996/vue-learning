@@ -117,8 +117,65 @@
     })
 ```
 
-#### [具名插槽](https://cn.vuejs.org/v2/guide/components-slots.html#%E5%85%B7%E5%90%8D%E6%8F%92%E6%A7%BD)
-* 
+#### 可以使用 <slot>默认内容</slot> 来指定插槽里的默认内容
+```
+    <div id="app">
+        <child></child>
+    </div>
+
+    Vue.component('child', {
+        template: '<div><slot>default content</slot></div>'
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+        }
+    })
 ```
 
+#### 具名插槽:在一个组件中放入多个插槽
+* 在组件内部用slot name="header"的形式提供插槽
+* 在组件外部用 template v-slot:header 的形式提供插槽内容
 ```
+    <div id="app">
+        <base-layout>
+            <template v-slot:header>
+                <h1>Here might be a page title</h1>
+            </template>
+
+            <p>A paragraph for the main content.</p>
+            <p>And another one.</p>
+
+            <template v-slot:footer>
+                <p>Here's some contact info</p>
+            </template>
+        </base-layout>
+    </div>
+
+    Vue.component('base-layout', {
+        data: function () {
+            return {
+            }
+        },
+        template: `
+        <div class="container">
+            < header >
+                <slot name="header"></slot>
+            </header>
+            <main>
+                <slot></slot>
+            </main>
+            <footer>
+                <slot name="footer"></slot>
+            </footer>
+        </div > `,
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+        }
+    })
+```
+

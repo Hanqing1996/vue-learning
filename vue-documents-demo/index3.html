@@ -11,18 +11,37 @@
 
 <body>
     <div id="app">
-        <one :id="oneValueIndata"></one>
+       <child></child>    
     </div>
 </body>
 <script>
-    Vue.component('one', {
-        template: '<span>kk</span>'
+    Vue.component('child', {
+        data: function () {
+            return {
+            }
+        },
+        template: `
+        <div class="container">
+            < header >
+                <slot name="header"></slot>
+            </header>
+            <main>
+                <slot></slot>
+            </main>
+            <footer>
+                <slot name="footer"></slot>
+            </footer>
+        </div > `,
     })
 
     new Vue({
         el: '#app',
         data: {
-            // oneValueIndata: "hh"
+        },
+        created: function () {
+
+            // `this` 指向 vm 实例
+            console.log(this.$slots)
         }
     })
 </script>

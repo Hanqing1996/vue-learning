@@ -9,7 +9,7 @@
 ```
 
 #### Vue实例与组件的区别
-* 能正常渲染，渲染结果为<span id="idValue"><span>
+1. 
 ```
 <div id="app">
     <div id="idValue"></div>
@@ -21,7 +21,11 @@
         },
     })
 ```
-* 能正常渲染，渲染结果为<span id="idValue"><span>
+ 能正常渲染，渲染结果为
+```
+ <span id="idValue"><span>
+```
+2. 
 ```
 <div id="app">
     <child id="idValue"></child>
@@ -41,7 +45,11 @@ new Vue({
     }
 })
 ```
-* 不能正常渲染，看不见"somt thing"，因为template里面没有放置插槽
+能正常渲染，渲染结果为
+```
+<span id="idValue"><span>
+```
+3. 
 ```
     <div id="app">
         <child>somt thing</child>
@@ -61,7 +69,50 @@ new Vue({
         }
     })
 ```
-* 能正常渲染，看见"somt thing"
+不能正常渲染，看不见"somt thing"，因为template里面没有放置插槽
+4. 
+```
+    <div id="app">
+        <child></child>
+    </div>
+
+    Vue.component('child', {
+        data: function () {
+            return {
+            }
+        },
+        template: '<div><slot>defalut content</slot></div>',
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+        }
+    })
+```
+看见"defalut content",因为没有在组件child外部提供插槽内容，故使用后备内容"defalut content"
+5. 
+```
+    <div id="app">
+        <child>some thing</child>
+    </div>
+
+    Vue.component('child', {
+        data: function () {
+            return {
+            }
+        },
+        template: '<div><slot>defalut content</slot></div>',
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+        }
+    })
+```
+看见"somt thing",因为template里面有放置插槽,注意"something"的优先级高于作为后备内容的"defalut content"
+6. 
 ```
     <div id="app">
         <span id="idValue">somt thing</span>
@@ -73,8 +124,7 @@ new Vue({
         }
     })
 ```
-
-
+能正常渲染，看见"somt thing"
 
 #### [vue风格指南](https://cn.vuejs.org/v2/style-guide/)
 * 自闭合组件
@@ -96,8 +146,8 @@ new Vue({
 * 在组件外部使用v-bind绑定的属性
 ```
 <div id="app">
-        <child :id="oneValueIndata"></child>
-    </div>
+    <child :id="oneValueIndata"></child>
+</div>
 ```
 * 在组件内部使用v-bind绑定的属性
 ```
@@ -157,7 +207,10 @@ new Vue({
 * .sync 修饰符：用于实现子组件更新父组件的props
 * .sync语法糖原理
 * 如果 <navigation-link> 没有包含一个 <slot> 元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃。
-* 使用具名插槽 <slot name="xxx'> 可以实现一个组件拥有多个插槽]
+* [使用具名插槽 <slot name="xxx'> 可以实现一个组件拥有多个插槽](https://cn.vuejs.org/v2/guide/components-slots.html#%E5%85%B7%E5%90%8D%E6%8F%92%E6%A7%BD%E7%9A%84%E7%BC%A9%E5%86%99)
+* 可以使用 <slot>默认内容</slot> 来指定插槽里的默认内容
+* 具名插槽:在一个组件中放入多个插槽
+* vm.$slots(unresolved)
 
 
 
