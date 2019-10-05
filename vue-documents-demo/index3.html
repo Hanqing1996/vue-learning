@@ -11,37 +11,34 @@
 
 <body>
     <div id="app">
-       <child></child>    
+        <todo-list v-bind:todos="todos">
+            <template v-slot:todo="{ todo }">
+                {{ todo.text }}
+            </template>
+        </todo-list>
     </div>
 </body>
 <script>
-    Vue.component('child', {
-        data: function () {
-            return {
-            }
-        },
+    Vue.component('todo-list', {
         template: `
-        <div class="container">
-            < header >
-                <slot name="header"></slot>
-            </header>
-            <main>
-                <slot></slot>
-            </main>
-            <footer>
-                <slot name="footer"></slot>
-            </footer>
-        </div > `,
+        <ul>
+            <li v-for="todo in filteredTodos" v-bind:key="todo.id">
+                <slot name="todo" v-bind:todo="todo">
+                    <!-- 后备内容 -->
+                    {{ todo.text }}
+                </slot>
+            </li>
+        </ul>`,
+        props: ['filteredTodos']
     })
 
-    new Vue({
+    var example1 = new Vue({
         el: '#app',
         data: {
-        },
-        created: function () {
-
-            // `this` 指向 vm 实例
-            console.log(this.$slots)
+            filteredTodos: [
+                { text: 'Foo', id: 1 },
+                { text: 'Bar', id: 2 }
+            ]
         }
     })
 </script>
