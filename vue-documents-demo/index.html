@@ -11,25 +11,16 @@
 
 <body>
     <div id="app">
-        <base-layout>
-            <template v-slot:header>
-                <h1>Here might be a page title</h1>
-            </template>
+        <g-button icon="hh">
 
-            <p>A paragraph for the main content.</p>
-            <p>And another one.</p>
-
-            <template v-slot:footer>
-                <p>Here's some contact info</p>
-            </template>
-        </base-layout>
-
+        </g-button>
     </div>
 </body>
 
 <script>
-    Vue.component('base-layout', {
-        template:''
+    Vue.component('g-button', {
+        template:'<div>{{icon}}<div>',
+        props:['icon']
     })
 
     var app = new Vue({
@@ -38,7 +29,4 @@
         }
     })
 </script>
-
 </html>
-
-this.$slots
