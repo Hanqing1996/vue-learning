@@ -11,34 +11,16 @@
 
 <body>
     <div id="app">
-        <todo-list v-bind:todos="todos">
-            <template v-slot:todo="{ todo }">
-                {{ todo.text }}
-            </template>
-        </todo-list>
+        <div v-bind:class="{ active: isActive }">hhh</div>
     </div>
 </body>
 <script>
-    Vue.component('todo-list', {
-        template: `
-        <ul>
-            <li v-for="todo in filteredTodos" v-bind:key="todo.id">
-                <slot name="todo" v-bind:todo="todo">
-                    <!-- 后备内容 -->
-                    {{ todo.text }}
-                </slot>
-            </li>
-        </ul>`,
-        props: ['filteredTodos']
-    })
 
     var example1 = new Vue({
         el: '#app',
         data: {
-            filteredTodos: [
-                { text: 'Foo', id: 1 },
-                { text: 'Bar', id: 2 }
-            ]
+            isActive: true,
+            hasError: false
         }
     })
 </script>

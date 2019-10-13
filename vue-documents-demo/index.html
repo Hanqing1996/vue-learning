@@ -11,22 +11,78 @@
 
 <body>
     <div id="app">
-        <g-button icon="hh">
-
-        </g-button>
-    </div>
+        <p>{{ message }}</p>
+    </div>    
 </body>
-
-<script>
-    Vue.component('g-button', {
-        template:'<div>{{icon}}<div>',
-        props:['icon']
-    })
-
-    var app = new Vue({
+<script type="text/javascript">
+    var vm = new Vue({
         el: '#app',
-        data: {
+        data: {message: 'Hello Vue~'},
+        beforeCreate: function(){
+            console.group('beforeCreate 创建前 =========')
+            console.log('%c%s','color:red','el      :',this.$el) // 1 => undefined
+            console.log('%c%s','color:red','data    :',this.$data) // 1 => undefined
+            console.log('%c%s','color:red','message :',this.message) // 1 => undefined
+
+        },
+        created: function(){
+            console.group('created 创建完毕 =========')
+            console.log('%c%s','color:red','el      :',this.$el) // 1 => undefined
+            console.log('%c%s','color:red','data    :',this.$data) // 1 => {message: 'Hello Vue~'}
+            console.log('%c%s','color:red','message :',this.message) // 1 => 'Hello Vue~'
+
+        },
+        beforeMount: function(){
+            console.group('beforeMount 挂载前 =========')
+            console.log('%c%s','color:red','el      :',this.$el) // 1 => <div id="app"><p>{{ message }}</p></div>
+            console.log('%c%s','color:red','data    :',this.$data) // 1 => {message: 'Hello Vue~'}
+            console.log('%c%s','color:red','message :',this.message) // 1 => 'Hello Vue~'
+
+        },
+        mounted: function(){
+            console.group('mounted 挂载结束 =========')
+            console.log('%c%s','color:red','el      :',this.$el) // 1 => <div id="app"><p>'Hello Vue~'</p></div>
+            console.log('%c%s','color:red','data    :',this.$data) // 1 => {message: 'Hello Vue~'}
+            console.log('%c%s','color:red','message :',this.message) // 1 => 'Hello Vue~'
+
+        },
+        beforeUpdate: function(){
+            console.group('beforeUpdate 更新前 =========')
+            console.log('%c%s','color:red','el      :',this.$el) // 2 => <div id="app"><p>'Celine~'</p></div>
+            console.log('%c%s','color:red','data    :',this.$data) // 2 => {message: 'Celine~'}
+            console.log('%c%s','color:red','message :',this.message) // 2 => 'Celine~'
+
+        },
+        updated: function() {
+            console.group('updated 更新完成 =========')
+            console.log('%c%s','color:red','el      :',this.$el) // 2 => <div id="app"><p>'Celine~'</p></div>
+            console.log('%c%s','color:red','data    :',this.$data) // 2 => {message: 'Celine~'}
+            console.log('%c%s','color:red','message :',this.message) // 2 => 'Celine~
+            
+        },
+        beforeDestroy: function(){
+            console.group('beforeDestroy 销毁前 =========')
+            console.log('%c%s','color:red','el      :',this.$el) // 3 => <div id="app"><p>'Celine~'</p></div>
+            console.log('%c%s','color:red','data    :',this.$data) // 3 => {message: 'Celine~'}
+            console.log('%c%s','color:red','message :',this.message) // 3 => 'Celine~
+
+        },
+        destroyed: function(){
+            console.group('destroyed 销毁完成 =========')
+            console.log('%c%s','color:red','el      :',this.$el) // 3 => <div id="app"><p>'Celine~'</p></div>
+            console.log('%c%s','color:red','data    :',this.$data) // 3 => {message: 'Celine~'}
+            console.log('%c%s','color:red','message :',this.message) // 3 => 'Celine~
+
         }
     })
+
+    // 1 页面直接刷新进来，执行的钩子有 beforeCreate / created / beforeMount / mounted 四个。
+    // 2 在控制台执行  vm.message = "Celine~" 后，执行的钩子有 beforeUpdate / updated 两个。
+    //   更新前和更新后的，打印数据均是新数据 ？？ 这点和想象的不太一致。
+    // 3 在控制台执行  vm.$destroy() 后，执行的钩子有 beforeDestroy / destroyed 两个。
+    //   销毁前和销毁后，数据依旧存在？？ 这点也和想象的不太一致。不过这个时候再去改变message值，vue不会再响应（也不会去执行beforeUpdate / updated 钩子）
+    // 4  在控制台执行  vm.message = "Bye~" ，没有任何钩子有响应。
+
 </script>
+
 </html>
