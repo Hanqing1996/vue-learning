@@ -1,19 +1,24 @@
 #### 计算属性的典型用法
+*  如果 a 依赖于 b,就应该把 a 设置为 computed
 ```
-var vm = new Vue({
-  el: '#example',
-  data: {
-    message: 'Hello'
-  },
-  computed: {
-    
-    // message是需要侦听的值。message变化后，reversedMessage这一计算属性的值将随之变化，注意这与watch的机制相反
-    reversedMessage: function () {
-      return this.message.split('').reverse().join('')
+data: {
+    a: 1,
+},
+computed: {
+    b:function(){
+        return this.a+1;
     }
-  }
-})
+}
 ```
+而不应该把 a,b 都作为 data
+```
+// b 不会随 a 更新而更新
+data: {
+    a: 1,
+    b:a+1
+},
+``` 
+
 #### [计算属性缓存 vs 方法](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E7%BC%93%E5%AD%98-vs-%E6%96%B9%E6%B3%95)
 1. 我们可以将同一函数定义为一个方法而不是一个计算属性。两种方式的最终结果确实是完全相同的。
 2. 然而，不同的是计算属性是基于它们的响应式依赖进行 **缓存**的。只在相关响应式依赖发生改变时它们才会重新求值。
@@ -22,14 +27,7 @@ var vm = new Vue({
 答案:1 3
 
 #### [计算属性 vs 侦听属性](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7-vs-%E4%BE%A6%E5%90%AC%E5%B1%9E%E6%80%A7)
-如果a,b,c,d的变化都会引起e的变化,则应该把e设置为计算属性
-```
-computed: {
-    e:function(){
-        return this.a+this.b+this.c
-    }
-}
-```
+
 
 #### [watch](https://cn.vuejs.org/v2/api/#watch)
 1. a的变化导致b的变化

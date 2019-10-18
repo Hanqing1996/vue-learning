@@ -11,16 +11,16 @@
 
 <body>
     <div id="app">
-        <div v-bind:class="{ active: isActive }">hhh</div>
+        <div>{{b}}</div>
     </div>
 </body>
 <script>
 
-    var example1 = new Vue({
+    var vm = new Vue({
         el: '#app',
         data: {
-            isActive: true,
-            hasError: false
+            a: 1,
+            b:a+1
         }
     })
 </script>
