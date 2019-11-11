@@ -11,9 +11,9 @@
 #### Vue实例与组件的区别
 1. 
 ```
-<div id="app">
+<span id="app">
     <div id="idValue"></div>
-<div>
+<span>
 
  var vm = new Vue({
         el: "#app",

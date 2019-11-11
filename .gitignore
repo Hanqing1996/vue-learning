@@ -19,3 +19,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+demo-11-11/node_modules
+demo-11-11/.cache
+demo-11-11/dist
