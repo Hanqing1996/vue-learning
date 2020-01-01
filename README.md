@@ -167,7 +167,7 @@ new Vue({
 * 不在data中声明的属性如何更新视图
 * bind绑定的是属性（key,title,style,class），而非数据。
 * v-bind的几种等价写法
-* v-bind和props用于父组件给子组件传值（通信）
+* 父组件向子组件传值
 * v-bind绑定data里声明的属性
 * 在子组件外部中使用v-bind绑定的属性必须在父组件的data对象中声明（或者用父组件的[propsData](https://cn.vuejs.org/v2/api/#propsData)）
 * 组件外部的v-bind与组件内部的v-bind
