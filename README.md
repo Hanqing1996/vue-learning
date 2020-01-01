@@ -1,7 +1,8 @@
 #### 父子组件通信 
 * 父组件向子组件传递数据
 ```
-父组件.data/propsData + 子组件.v-bind + 子组件.props[''] 
+<child :childProp="fatherProp"></child>
+// 要求child内部有对于childProp的定义(prop或data里)
 ```
 * 子组件向父组件传递数据
 ```
