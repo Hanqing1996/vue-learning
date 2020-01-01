@@ -4,7 +4,7 @@
 3. :title=message
 4. v-bind:title=message
 
-#### v-bind和props用于父组件给子组件传值
+#### 父组件向子组件传值
 ```
     <div id="father">
         <child :child-val="fatherVal"></child>
